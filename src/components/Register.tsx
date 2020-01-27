@@ -87,7 +87,7 @@ export const Register = (props: IProps) => {
                           type="password"
                           width={100}
                           value={props.currentPassword}
-                          onChange={e => props.handlePassword(e)}
+                          onChange={props.handlePassword}
                           placeholder="Enter your password"
                           {...field}
                         />
