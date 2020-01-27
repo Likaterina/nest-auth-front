@@ -18,7 +18,7 @@ import { HOST } from "./components/constants"
 
 const App = () => {
   const [user, setUser] = useState("")
-  const [currentLogin, setCurrentLogin] = useState("")
+  const [currentLogin, setCurrentLogin] = useState<string>("")
   const [currentPassword, setCurrentPassword] = useState("")
   let history = useHistory()
 
@@ -48,19 +48,15 @@ const App = () => {
     setCurrentPassword("")
   }
 
-  const registerRequest = (e: React.FormEvent<HTMLFormElement>): void => {
+  const registerRequest = (paylaod: any): void => {
     console.log(HOST)
-    e.preventDefault()
-    axios
-      .post(`${HOST}/auth/registration`, {
-        username: currentLogin,
-        password: currentPassword
-      })
-      .then(res => {
-        tokenService.setToken(res.data.accessToken)
-        getAndSetUser()
-        window.location.replace("/")
-      })
+    // e.preventDefault()
+    axios.post(`${HOST}/auth/registration`, paylaod).then(res => {
+      console.log(res.data)
+      tokenService.setToken(res.data.accessToken)
+      getAndSetUser()
+      window.location.replace("/")
+    })
     setCurrentLogin("")
     setCurrentPassword("")
   }
@@ -108,7 +104,7 @@ const App = () => {
           />
         </Route>
         <PrivateRoute path="/">
-          <Chat  />
+          <Chat />
         </PrivateRoute>
       </Switch>
     </div>

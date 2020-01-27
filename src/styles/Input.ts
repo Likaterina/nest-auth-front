@@ -41,6 +41,7 @@ const Input = styled.input<InputProps>`
     :focus::-webkit-input-placeholder {
         opacity: 0;
         transform: translateX(10px);
+ 
     }
 `;
 
