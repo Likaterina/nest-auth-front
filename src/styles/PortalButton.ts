@@ -15,13 +15,13 @@ const PortalButton = styled.button<ButtonProps>`
   font-family: "Merienda One", sans-serif;
   font-size: 16px;
   letter-spacing: 1px;
-  border: 0.5px solid #d8dde6;
   color: #5a2e3c;
   text-decoration: none;
-  margin: 20px 5px 5px 1em;
-  padding: 30px;
-  background: #b0aac0;
+  margin: 60px 5px 5px -7px;
+  padding: 20px;
+  background: rgba(246, 246, 246, 0.3);
   cursor: pointer;
+  opacity: 0.7;
 `
 
 export default PortalButton

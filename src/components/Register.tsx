@@ -9,6 +9,8 @@ import {
   Formik,
   useFormik
 } from "formik"
+import styled, { ThemeProvider } from "styled-components"
+
 import Input from "../styles/Input"
 import InputWrapper from "../styles/InputWrapper"
 import Button from "../styles/Button"
@@ -18,6 +20,8 @@ import { SignupSchema } from "./Yup.Schema"
 import Error from "../styles/Error"
 import { Modal } from "./Modal"
 import PortalButton from "../styles/PortalButton"
+import Portal from "../styles/Portal"
+import { CheckBox, ToggleButton } from "../styles/ToggleButton"
 
 interface IProps {
   registerRequest: (payload: any) => void
@@ -29,8 +33,11 @@ interface IProps {
 
 export const Register = (props: IProps) => {
   const [showModal, setModal] = useState(false)
+  const [changeTheme, setChangeTheme] = useState(false)
 
   const toggleModal = () => setModal(!showModal)
+
+  const toggleTheme = () => setChangeTheme(!changeTheme)
 
   useEffect(() => {
     const token = tokenService.getToken()
@@ -41,6 +48,13 @@ export const Register = (props: IProps) => {
 
   return (
     <Wrapper id="wrapper">
+      <ToggleButton
+        id="checkbox"
+        type="checkbox"
+        onChange={toggleTheme}
+        checked={changeTheme}
+      />
+      <CheckBox htmlFor="checkbox" />
       <Title>Register user</Title>
       <Formik
         initialValues={{
@@ -103,10 +117,15 @@ export const Register = (props: IProps) => {
           )
         }}
       />
+
       <React.Fragment>
         <Modal open={showModal} onClose={toggleModal}>
-          <Button>I am portal!</Button>
+          <Portal>
+            {" "}
+            <Button>Close me!</Button>
+          </Portal>
         </Modal>
+
         <PortalButton onClick={toggleModal} marginLeft={100}>
           Push Me!
         </PortalButton>

@@ -1,6 +1,5 @@
 import React, { Props, useState, useEffect } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+
 import {
   useHistory,
   BrowserRouter as Router,
@@ -10,11 +9,13 @@ import {
   Redirect
 } from "react-router-dom"
 import axios from "axios"
+
 import { Login } from "./components/Login"
 import { Register } from "./components/Register"
 import { Chat } from "./components/Chat"
 import * as tokenService from "./components/tokenService"
 import { HOST } from "./components/constants"
+import * as apiService from "./components/apiService"
 
 const App = () => {
   const [user, setUser] = useState("")
@@ -42,22 +43,20 @@ const App = () => {
         tokenService.setToken(res.data.accessToken)
         console.log(res.data)
         getAndSetUser()
-        window.location.replace("/")
+        history.push("/")
       })
     setCurrentLogin("")
     setCurrentPassword("")
   }
 
-  const registerRequest = (paylaod: any): void => {
-    console.log(HOST)
-    console.log(paylaod)
-    
-    axios.post(`${HOST}/auth/registration`, paylaod).then(res => {
-      alert(JSON.stringify(res.data))
-      tokenService.setToken(res.data.accessToken)
-      getAndSetUser()
-      //window.location.replace("/")
-    }).catch(error => console.log(error))
+  const registerRequest = async (paylaod: any) => {
+    const response = await apiService.default.post(
+      "/auth/registration",
+      paylaod
+    )
+    tokenService.setToken(response.accessToken)
+    getAndSetUser()
+    history.push("/")
     setCurrentLogin("")
     setCurrentPassword("")
   }

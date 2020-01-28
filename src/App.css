@@ -7,7 +7,9 @@
   pointer-events: none;
 }
 
-
+body {
+  position: relative;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
