@@ -50,8 +50,7 @@ export const Register = (props: IProps) => {
         validationSchema={SignupSchema}
         onSubmit={(values, actions) => {
           props.registerRequest(values)
-          console.log({ values, actions })
-          alert(JSON.stringify(values, null, 2))
+          console.log(values, actions)
           actions.setSubmitting(false)
         }}
         render={formikBag => {

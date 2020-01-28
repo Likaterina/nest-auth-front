@@ -50,13 +50,14 @@ const App = () => {
 
   const registerRequest = (paylaod: any): void => {
     console.log(HOST)
-    // e.preventDefault()
+    console.log(paylaod)
+    
     axios.post(`${HOST}/auth/registration`, paylaod).then(res => {
-      console.log(res.data)
+      alert(JSON.stringify(res.data))
       tokenService.setToken(res.data.accessToken)
       getAndSetUser()
-      window.location.replace("/")
-    })
+      //window.location.replace("/")
+    }).catch(error => console.log(error))
     setCurrentLogin("")
     setCurrentPassword("")
   }
